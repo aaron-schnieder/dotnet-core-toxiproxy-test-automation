@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace ToxiproxyDotNetCore
+namespace ToxiproxyDotNetCore.Interfaces
 {
     public interface IApiClient    {
         Task<PostmanEcho> GetEchoAsync();

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using ToxiproxyDotNetCore.Interfaces;
 
 namespace ToxiproxyDotNetCore
 {

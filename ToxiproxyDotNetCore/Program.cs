@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http;
 using Newtonsoft.Json;
+using ToxiproxyDotNetCore.Interfaces;
 
 namespace ToxiproxyDotNetCore
 {

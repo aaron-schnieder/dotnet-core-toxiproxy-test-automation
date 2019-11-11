@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Moq;
+using ToxiproxyDotNetCore.Interfaces;
 
 namespace ToxiproxyDotNetCore.Test
 {
