@@ -13,10 +13,32 @@ Web Api that provides a simple HTTP Rest API that mirrors the APIs provided by p
 ### ToxiproxyDotNetCore.Test
 Test automation that runs a set of unit and integration tests against the funtionality in the ToxiproxyDotNetCore console application.
 
+### Toxiproxy
+Toxiproxy.ToxiproxyClient is a .net core wrapper for interacting with the toxiproxy service. This wrapper communicates with toxiproxy via the local HTTP Rest API to manage proxies and toxics.
+
 ### Test Architecture
-The following diagram provides a visual overview of the services and interactions of the test automation.
+The following diagram provides an overview of the services and interactions of the test automation.
+
+- IApiClient dependecy implementation is injected at runtime in Module class
+- In production, IApiClient implementation will make HTTP Rest request to http://postman-echo.com
+- During test automation, IApiClient implementation will make HTTP Rest request to toxiproxy
+- Toxiproxy will be hosted as an OS service or Docker container and configured with a proxy and optional toxics to apply network chaos
+- ToxiproxyDotnetCore.Test.Api is a simple HTTP Rest Web Api that mirrors postman-echo.com
+- ToxiproxyDotnetCore.Test.Api enables a controlled API that can be run locally and control the test environment
 
 ![Test Automation Overview](test-automation-architecture.png)
+
+### Toxiproxy Integration Test Workflow
+The following diagram provides an overview of the workflow for an integration test using Toxiproxy for chaos network testing.
+
+1. Integration test method calls ToxiproxyClient with toxic to apply to proxy
+2. ToxiproxyClient creates a new proxy for the test
+3. ToxiproxyClient adds a new toxic to the proxy for the test
+4. Integration test method executes method under test, injecting the toxyproxy endpoint as the URI to make the HTTP request to
+5. Test Web API receives the request and issues the response, toxiproxy applies toxic to the network connection
+6. ToxiproxyClient resets toxiproxy to clean up proxy and toxic after test completes
+
+![Toxiproxy Integration Test Overview](toxiproxy-integration-test-overview.png)
 
 ## Running Toxiproxy
 Toxiproxy must run as a local application or service to provide proxy functionality for network connections. There are many options to run Toxiproxy on your local OS or on your CI build server.
