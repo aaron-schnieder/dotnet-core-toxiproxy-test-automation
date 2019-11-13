@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using Microsoft.Extensions.Http;
+using System.Threading.Tasks;
 
 namespace Toxiproxy
 {
@@ -12,19 +12,19 @@ namespace Toxiproxy
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
-        public IEnumerable<Toxic> List(string proxyName) {
+        public Task<IEnumerable<Toxic>> ListAsync(string proxyName) {
             throw new NotImplementedException();
         }
-        public Toxic Get(string toxicName, string proxyName) {
+        public Task<Toxic> GetAsync(string toxicName, string proxyName) {
             throw new NotImplementedException();
         }
-        public Toxic Add(Toxic toxic, string proxyName) {
+        public Task<Toxic> AddAsync(Toxic toxic, string proxyName) {
             throw new NotImplementedException();
         }
-        public Toxic Update(Toxic toxic, string toxicNameToUpdate, string proxyName) {
+        public Task<Toxic> UpdateAsync(Toxic toxic, string toxicNameToUpdate, string proxyName) {
             throw new NotImplementedException();
         }
-        public void Delete(string toxicName, string proxyName) {
+        public Task DeleteAsync(string toxicName, string proxyName) {
             throw new NotImplementedException();
         }
     }

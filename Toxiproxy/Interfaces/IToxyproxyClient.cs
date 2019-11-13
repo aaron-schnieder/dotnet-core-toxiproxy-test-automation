@@ -1,11 +1,19 @@
-using System;
-using System.Net.Http;
-using Microsoft.Extensions.Http;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Toxiproxy
 {
     public interface IToxiproxyClient 
     {
-        void Reset();
+        Task ResetAsync();
+
+        /* Proxy methods */
+        Task<IEnumerable<Proxy>> ListProxiesAsync();
+        Task<Proxy> GetProxyAsync(string proxyName);
+        Task<Proxy> AddProxyAsync(Proxy proxy);
+        Task<Proxy> UpdateProxyAsync(string proxyNameToUpdate, Proxy proxy);
+        Task DeleteProxyAsync(string proxyName);
+        
+        /* Toxic methods */
     }
 }

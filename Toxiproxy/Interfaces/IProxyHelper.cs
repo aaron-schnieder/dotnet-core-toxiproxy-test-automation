@@ -1,14 +1,14 @@
-using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace Toxiproxy
 {
     public interface IProxyHelper
     {
-        IEnumerable<Proxy> List();
-        Proxy Get(string proxyName);
-        Proxy Add(Proxy proxy);
-        Proxy Update(string proxyNameToUpdate, Proxy proxy);
-        void Delete(string proxyName);
+        Task<IEnumerable<Proxy>> ListAsync();
+        Task<Proxy> GetAsync(string proxyName);
+        Task<Proxy> AddAsync(Proxy proxy);
+        Task<Proxy> UpdateAsync(string proxyNameToUpdate, Proxy proxy);
+        Task DeleteAsync(string proxyName);
     }
 }

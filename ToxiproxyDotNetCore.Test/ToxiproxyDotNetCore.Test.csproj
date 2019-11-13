@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ToxiproxyDotNetCore\ToxiproxyDotNetCore.csproj" />
+    <ProjectReference Include="..\Toxiproxy\Toxiproxy.csproj" />
   </ItemGroup>
 
 </Project>
