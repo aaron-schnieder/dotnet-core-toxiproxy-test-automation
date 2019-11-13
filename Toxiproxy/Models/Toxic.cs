@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Toxiproxy
 {
-    public class Toxic
+    public abstract class Toxic
     {
         [JsonProperty("name")]
         public string Name {get;set;}

@@ -16,7 +16,7 @@ namespace Toxiproxy
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _toxiproxyServerUri = toxiproxyServerUri ?? throw new ArgumentNullException(nameof(toxiproxyServerUri));
             _proxyHelper = proxyHelper ?? new ProxyHelper(httpClient, toxiproxyServerUri);
-            _toxicHelper = toxicHelper ?? new ToxicHelper(httpClient);
+            _toxicHelper = toxicHelper ?? new ToxicHelper(httpClient, toxiproxyServerUri);
         }
 
         ///
@@ -51,6 +51,26 @@ namespace Toxiproxy
 
         public async Task DeleteProxyAsync(string proxyName) {
             await _proxyHelper.DeleteAsync(proxyName);
+        }
+
+        public async Task<IEnumerable<Toxic>> ListToxicsAsync(string proxyName) {
+            throw new NotImplementedException();
+        }
+
+        public async Task<T> GetToxicAsync<T>(string toxicName, string proxyName) {         
+            throw new NotImplementedException();
+        }
+        
+        public async Task<T> AddToxicAsync<T>(T toxic, string proxyName) {
+            return await _toxicHelper.AddAsync<T>(toxic, proxyName);
+        }
+
+        public async Task<T> UpdateToxicAsync<T>(T toxic, string toxicNameToUpdate, string proxyName) {
+            throw new NotImplementedException();
+        }
+        
+        public async Task DeleteToxicAsync(string toxicName, string proxyName) {
+            await _toxicHelper.DeleteAsync(toxicName, proxyName);
         }
     }
 }

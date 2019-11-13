@@ -15,5 +15,10 @@ namespace Toxiproxy
         Task DeleteProxyAsync(string proxyName);
         
         /* Toxic methods */
+        Task<IEnumerable<Toxic>> ListToxicsAsync(string proxyName);
+        Task<T> GetToxicAsync<T>(string toxicName, string proxyName);
+        Task<T> AddToxicAsync<T>(T toxic, string proxyName);
+        Task<T> UpdateToxicAsync<T>(T toxic, string toxicNameToUpdate, string proxyName);
+        Task DeleteToxicAsync(string toxicName, string proxyName);
     }
 }
