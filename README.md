@@ -7,6 +7,7 @@ The following prerequisites are required to run the projects in this repo.
 1. [Microsoft .net core](https://dotnet.microsoft.com/download)
 2. [Install Toxiproxy](https://github.com/Shopify/toxiproxy#1-installing-toxiproxy) (additional instructions below)
 3. [IDE (vscode recommended)](https://code.visualstudio.com/download)
+4. [Docker](https://www.docker.com/get-started) (if using docker containers to host toxiproxy)
 
 ## Getting Started
 To get started with toxiproxy and this repo go through the following steps:
@@ -19,7 +20,27 @@ cd  ToxiproxyDotnetCore.Test.Api
 dotnet run
 ```
 
-3. In vscode, set debug breakpoints in ToxiproxyDotNetCore.Test.ModuleChaosTest.Get_Echo_Latency_Test_Toxiproxy_Endpoint and then debug the test
+3. Run an instance of toxiproxy server
+
+*from a terminal or command line prompt:*
+```
+toxiproxy-server
+```
+
+*from a docker container:*
+```
+docker run --name=toxiproxy --net=host --rm --expose 8080 -p 8080:8080 --expose 8474 -p 8474:8474 -it shopify/toxiproxy
+docker exec -it toxiproxy /bin/sh
+```
+
+4. Test toxiproxy functionality with the following commands
+
+```
+toxiproxy-cli create example -l 127.0.0.1:8080 -u postman-echo.com:80
+curl -v --location --request GET "127.0.0.1:8080/get?foo1=bar1&foo2=bar2"
+```
+
+5. In vscode, set debug breakpoints in ToxiproxyDotNetCore.Test.ModuleChaosTest.Get_Echo_Latency_Test_Toxiproxy_Endpoint and then debug the test
 
 ![vscode debug test](vscode-debug-test.png)
 
