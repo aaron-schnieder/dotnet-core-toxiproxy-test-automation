@@ -88,7 +88,7 @@ namespace ToxiproxyDotNetCore.Test
             }
             catch(Exception exception) {
                 // TODO: add logging
-
+                throw;
             }
             finally {
                 // clean up the proxy we created for testing
@@ -102,10 +102,10 @@ namespace ToxiproxyDotNetCore.Test
         [TestMethod]
         public async Task Get_Echo_Latency_Test_Toxiproxy_Endpoint()
         {
-            // Add 5 seconds of latency to introduce into the API call
+            // var to specify 5 seconds of latency to introduce into the API call
             var latency = 5000;
 
-            // create a new toxiproxy proxy
+            // create a new ToxiproxyClient instance
             var toxiproxyClient = new ToxiproxyClient(_httpClient, _toxiproxyServerUri);
 
             // add the toxiproxy proxy we will use for testing
@@ -116,7 +116,7 @@ namespace ToxiproxyDotNetCore.Test
                 Enabled = true
             });
 
-            // add a latency toxic to the proxy
+            // create a new latency toxic instance
             var newToxic = new LatencyToxic() {
                 Name = "GetEchoLatencyTestToxic",
                 Type = LatencyToxic.ToxicType,
@@ -138,7 +138,7 @@ namespace ToxiproxyDotNetCore.Test
                 // create a new instance of Module to test
                 _module = new Module(_chaosApiClient, new Mock<ILogger<Module>>().Object);
 
-                // test the GetDataAsync method                
+                // test the GetDataAsync method and track the execution time
                 stopWatch.Start();
                 result = await _module.GetDataAsync();
                 stopWatch.Stop();
@@ -146,7 +146,7 @@ namespace ToxiproxyDotNetCore.Test
             }
             catch(Exception exception) {
                 // TODO: add logging
-
+                throw;
             }
             finally {
                 // clean up the proxy we created for testing

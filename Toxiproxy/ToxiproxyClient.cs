@@ -29,6 +29,7 @@ namespace Toxiproxy
             }
             catch(Exception exception) {
                 // TODO: Add logging
+                throw;
             }
 
         }
