@@ -1,6 +1,28 @@
 # .Net Core Toxiproxy Test Automation
 This repo provides test automation examples using shopify/toxiproxy to create network level chaos and ensure services are able to handle various connectivity problems. The test automation is written in .net core and runs across various platforms. The intention of this repo is a best practice reference to use as a pattern to setup test automation for applications and APIs that rely on network connectivity for HTTP Rest API calls.
 
+## Prerequisites
+The following prerequisites are required to run the projects in this repo.
+
+1. [Microsoft .net core](https://dotnet.microsoft.com/download)
+2. [Install Toxiproxy](https://github.com/Shopify/toxiproxy#1-installing-toxiproxy) (additional instructions below)
+3. [IDE (vscode recommended)](https://code.visualstudio.com/download)
+
+## Getting Started
+To get started with toxiproxy and this repo go through the following steps:
+
+1. Get toxiproxy running in a docker container or a local service (see instructions below)
+2. Run an instance of the ToxiproxyDotNetCore.Test.Api web api from a terminal or command line prompt
+
+```
+cd  ToxiproxyDotnetCore.Test.Api
+dotnet run
+```
+
+3. In vscode, set debug breakpoints in ToxiproxyDotNetCore.Test.ModuleChaosTest.Get_Echo_Latency_Test_Toxiproxy_Endpoint and then debug the test
+
+![vscode debug test](vscode-debug-test.png)
+
 ## Overview
 The test automation example consists of the following projects.
 

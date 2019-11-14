@@ -39,7 +39,7 @@ namespace Toxiproxy
                 }
             }
             catch(Exception exception) {
-                // TODO: add logging
+                // TODO: add logging and handle exception
                 return null;
             }
 
@@ -66,7 +66,7 @@ namespace Toxiproxy
                 createdProxy = JsonConvert.DeserializeObject<Proxy>(resultString);
             }
             catch(Exception exception) {
-                // TODO: add logging
+                // TODO: add logging and handle exception
                 return null;
             }
 
@@ -84,7 +84,7 @@ namespace Toxiproxy
                 result.EnsureSuccessStatusCode();
             }
             catch(Exception exception) {
-                // TODO: add logging
+                // TODO: add logging and handle exception
             }
         }
     }
