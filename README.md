@@ -44,22 +44,18 @@ curl -v --location --request GET "127.0.0.1:8080/get?foo1=bar1&foo2=bar2"
 
 ![vscode debug test](vscode-debug-test.png)
 
-## Overview
-The test automation example consists of the following projects.
+## Test Automation Overview
+The test automation using toxiproxy can be accomplished via pure integration tests and/or hybrid code based unit tests.
 
-### ToxiproxyDotNetCore
-Console application that has an example HTTP Rest API client and implements dependency injection to enable test automation.
+### Integration Testing
+Toxiproxy can be used for integration testing between applications and off box dependencies. Toxiproxy can be configured as a service running on a server with proxies and toxics applied via the CLI. Application servers can be configured to send application traffic via toxiproxy proxy endpoints allowing the integration testing of application functionality when network chaos conditions occur, which can be controlled via toxiproxy toxics.
 
-### ToxiproxyDotNetCore.Test.Api
-Web Api that provides a simple HTTP Rest API that mirrors the APIs provided by postman-echo.com. This enables a local instance of the HTTP Rest API to run and local integration tests using toxiproxy toxics to execute with a controlled local endpoint.
+![Integration Test Overview](integration-test-overview.png)
 
-### ToxiproxyDotNetCore.Test
-Test automation that runs a set of unit and integration tests against the funtionality in the ToxiproxyDotNetCore console application.
+### Hybrid Code Unit Tests
+Toxiproxy can be used for code based tests that are not quite unit tests because we are making an out of process call, but I wouldn't consider them full integration tests because we can control the dependencies and still scope the test to a single unit of work. A local web api can be hosted that returns the expected response payload. Toxiproxy proxies and toxics can be created by (and cleaned up by) each unit test via the toxiproxy REST Api to allow each unit test to test the behavior of the method under test when dealing with a specific network chaos condition such as latency or packet loss.
 
-### Toxiproxy
-Toxiproxy.ToxiproxyClient is a .net core wrapper for interacting with the toxiproxy service. This wrapper communicates with toxiproxy via the local HTTP Rest API to manage proxies and toxics.
-
-### Test Architecture
+#### Hybrid Code Unit Test Architecture
 The following diagram provides an overview of the services and interactions of the test automation.
 
 - IApiClient dependecy implementation is injected at runtime in Module class
@@ -71,8 +67,8 @@ The following diagram provides an overview of the services and interactions of t
 
 ![Test Automation Overview](test-automation-architecture.png)
 
-### Toxiproxy Integration Test Workflow
-The following diagram provides an overview of the workflow for an integration test using Toxiproxy for chaos network testing.
+#### Hybrid Code Unit Test Workflow
+The following diagram provides an overview of the workflow for an hybrid code unit test using Toxiproxy for chaos network testing.
 
 1. Integration test method calls ToxiproxyClient with toxic to apply to proxy
 2. ToxiproxyClient creates a new proxy for the test
@@ -82,6 +78,18 @@ The following diagram provides an overview of the workflow for an integration te
 6. ToxiproxyClient resets toxiproxy to clean up proxy and toxic after test completes
 
 ![Toxiproxy Integration Test Overview](toxiproxy-integration-test-overview.png)
+
+#### ToxiproxyDotNetCore
+Console application that has an example HTTP Rest API client and implements dependency injection to enable test automation.
+
+#### ToxiproxyDotNetCore.Test.Api
+Web Api that provides a simple HTTP Rest API that mirrors the APIs provided by postman-echo.com. This enables a local instance of the HTTP Rest API to run and local integration tests using toxiproxy toxics to execute with a controlled local endpoint.
+
+#### ToxiproxyDotNetCore.Test
+Test automation that runs a set of unit and integration tests against the funtionality in the ToxiproxyDotNetCore console application.
+
+#### Toxiproxy
+Toxiproxy.ToxiproxyClient is a .net core wrapper for interacting with the toxiproxy service. This wrapper communicates with toxiproxy via the local HTTP Rest API to manage proxies and toxics.
 
 ## Running Toxiproxy
 Toxiproxy must run as a local application or service to provide proxy functionality for network connections. There are many options to run Toxiproxy on your local OS or on your CI build server.

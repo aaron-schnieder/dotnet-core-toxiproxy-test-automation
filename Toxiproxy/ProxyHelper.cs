@@ -40,7 +40,7 @@ namespace Toxiproxy
             }
             catch(Exception exception) {
                 // TODO: add logging and handle exception
-                return null;
+                throw;
             }
 
             return result;
@@ -67,7 +67,7 @@ namespace Toxiproxy
             }
             catch(Exception exception) {
                 // TODO: add logging and handle exception
-                return null;
+                throw;
             }
 
             return createdProxy;
@@ -85,6 +85,7 @@ namespace Toxiproxy
             }
             catch(Exception exception) {
                 // TODO: add logging and handle exception
+                throw;
             }
         }
     }
