@@ -106,7 +106,7 @@ docker pull shopify/toxiproxy
 docker run --name=toxiproxy --net=host --rm --expose 8080 -p 8080:8080 -it shopify/toxiproxy
 ```
 
-#### Exce into the container instance so we can run the CLI and setup proxies and toxics 
+#### Excc into the container instance so we can run the CLI and setup proxies and toxics 
 ```
 docker exec -it toxiproxy /bin/sh
 cd /go/bin/
